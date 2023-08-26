@@ -5,7 +5,7 @@
                 <v-row dense class="align-center">
                     <router-link :to="isLogged ? '/dashboard' : '/'" class="d-flex align-center no-underline">
                         <!-- App Icon by Icons8 -->
-                        <img src="/images/logo.svg" alt="Logo" height="40" class="mt-n1"/>
+                        <img src="@/../images/logo.svg" alt="Logo" height="40" class="mt-n1"/>
                         <v-app-bar-title class="align-center d-flex">
                             <span class="ml-3 align-center">
                                 <span class="font-weight-bold text-primary">Check</span>

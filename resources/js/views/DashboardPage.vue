@@ -38,7 +38,7 @@
                         <v-progress-linear indeterminate color="primary" />
                     </div>
                     <div v-else-if="tasks.length === 0" class="pa-6">
-                        <img src="/images/rocket.png" class="mx-auto d-block" style="max-width: 100px;" />
+                        <img src="@/../images/rocket.png" class="mx-auto d-block" style="max-width: 100px;" />
                         <p class="text-center font-weight-bold text-h6 mt-4 mb-2">You have no tasks</p>
                         <p class="text-center">Try adding one above</p>
                     </div>
