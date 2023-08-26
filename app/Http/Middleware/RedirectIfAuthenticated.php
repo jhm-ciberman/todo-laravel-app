@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
     {
         // Since we are building a SPA, we don't want to redirect the user to the home page
         // if they are already logged in. Instead, we want to return a 200 response.
-        
+
         /*$guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TaskController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home');
+
+Route::get('/user-info', fn () => Auth::user())->name('user')->middleware('auth');
+
+Route::apiResource('tasks', TaskController::class);
 
 // Catch-all route for Vue Router. This let us have pretty URLs in our Vue Powered SPA.
 Route::view('/{path?}', 'home')->where('path', '.*');
