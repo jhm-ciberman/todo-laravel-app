@@ -40,7 +40,7 @@ export default {
         return {
             appName: import.meta.env.VITE_APP_NAME,
             drawer: false,
-        }
+        };
     },
     computed: {
         isMobile() {
@@ -58,5 +58,5 @@ export default {
             store.logout();
         },
     },
-}
+};
 </script>

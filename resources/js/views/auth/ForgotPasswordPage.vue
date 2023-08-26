@@ -19,8 +19,7 @@
                                 v-model="form.email"
                                 label="Email"
                                 type="email"
-                                required
-                            ></v-text-field>
+                                required></v-text-field>
                             <v-btn type="submit" block color="primary" :loading="loading" :disabled="throtleCountdown > 0">
                                 {{ throtleCountdown > 0 ? `Wait ${throtleCountdown} seconds to send again` : 'Send Password Reset Link' }}
                             </v-btn>
@@ -74,7 +73,7 @@ export default {
              * @type {Number}
              */
             throtleCountdown: 0,
-        }
+        };
     },
     methods: {
         async submit() {
@@ -106,5 +105,5 @@ export default {
             }
         }, 1000);
     },
-}
+};
 </script>

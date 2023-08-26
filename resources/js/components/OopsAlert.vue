@@ -3,10 +3,6 @@
 
         <div>{{ errorTitle }}</div>
         
-        <div v-if="errorDetails" class="text-body-2 mt-1">
-            {{ errorDetails }}
-        </div>
-
         <div class="d-flex justify-end mt-2">
             <v-btn v-if="showRetry" variant="tonal" @click="$emit('retry')">
                 Retry
@@ -17,53 +13,35 @@
   
 <script>
 export default {
+    emits: ['retry'],
+
     props: {
         error: {
             type: Object,
-            default: null
+            default: null,
         },
         showRetry: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
 
     computed: {
         errorTitle() {
-            if (this.isValidation) {
+            if (this.isAxiosError) {
                 return this.serverErrorMessage;
             }
 
             return 'Oops! Something went wrong';
         },
 
-        errorDetails() {
-            if (this.error instanceof Error) {
-                return null  
-            }
-
-            if (this.isAxiosError) {
-                return this.serverErrorMessage;
-            }
-
-            return null
-        },
-
-        isValidation() {
-            return this.isAxiosError && this.error.response?.status === 422
-        },
-
         isAxiosError() {
-            return this.error && this.error.isAxiosError  
+            return this.error?.isAxiosError;
         },
 
         serverErrorMessage() {
-            return this.error.response?.data.message || 'Oops! Something went wrong. Please try again in a few seconds.'
+            return this.error.response?.data.message || 'Oops! Something went wrong. Please try again in a few seconds.';
         },
-
-        onColor() {
-            return this.color ? `on-${this.color}` : 'on-primary'
-        }
-    }
-}
+    },
+};
 </script>

@@ -1,5 +1,6 @@
 import { reactive } from 'vue';
 import router from './router';
+import axios from 'axios';
 
 
 // Using Pinia is an overkill for this project. Let's keep it simple. :)
@@ -19,7 +20,7 @@ const store = reactive({
      * @returns {Promise<void>}
      */
     async login(data) {
-        const response = await axios.post('/login', data);
+        await axios.post('/login', data);
 
         this.isLoggedIn = true;
         this.user = null;
@@ -57,13 +58,13 @@ const store = reactive({
      * @returns {Promise<void>}
      */
     async register(data) {
-        const response = await axios.post('/register', data);
+        await axios.post('/register', data);
 
         this.isLoggedIn = true;
         this.user = null;
 
         router.push({ name: 'Dashboard' });
-    }
+    },
 });
 
 export default store;

@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import store from '@/store';
 
 // Navigation guards
-function ensureAuthenticated(to, from) {
+function ensureAuthenticated(_to, _from) {
     if (!store.isLoggedIn) {
         return { name: 'Login' };
     }
@@ -10,7 +10,7 @@ function ensureAuthenticated(to, from) {
     return true;
 }
 
-function ensureGuest(to, from) {
+function ensureGuest(_to, _from) {
     if (store.isLoggedIn) {
         return { name: 'Dashboard' };
     }
@@ -22,13 +22,13 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/HomePage.vue'),
         beforeEnter: [ensureGuest],
     },
     {
         path: '/login',
         name: 'Login',
-        component: () => import('@/views/auth/Login.vue'),
+        component: () => import('@/views/auth/LoginPage.vue'),
         beforeEnter: [ensureGuest],
         meta: {
             title: 'Login',
@@ -37,7 +37,7 @@ const routes = [
     {
         path: '/register',
         name: 'Register',
-        component: () => import('@/views/auth/Register.vue'),
+        component: () => import('@/views/auth/RegisterPage.vue'),
         beforeEnter: [ensureGuest],
         meta: {
             title: 'Register',
@@ -46,7 +46,7 @@ const routes = [
     {
         path: '/forgot-password',
         name: 'ForgotPassword',
-        component: () => import('@/views/auth/ForgotPassword.vue'),
+        component: () => import('@/views/auth/ForgotPasswordPage.vue'),
         beforeEnter: [ensureGuest],
         meta: {
             title: 'Forgot Password',
@@ -55,7 +55,7 @@ const routes = [
     {
         path: '/reset-password/:token',
         name: 'ResetPassword',
-        component: () => import('@/views/auth/ResetPassword.vue'),
+        component: () => import('@/views/auth/ResetPasswordPage.vue'),
         beforeEnter: [ensureGuest],
         props: true,
         meta: {
@@ -65,7 +65,7 @@ const routes = [
     {
         path: '/dashboard',
         name: 'Dashboard',
-        component: () => import('@/views/Dashboard.vue'),
+        component: () => import('@/views/DashboardPage.vue'),
         beforeEnter: [ensureAuthenticated],
     },
 ];
@@ -75,7 +75,7 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach((to, from) => {
+router.beforeEach((to, _from) => {
     // If the route has a meta title set, update the document title
     const appName = import.meta.env.VITE_APP_NAME;
 

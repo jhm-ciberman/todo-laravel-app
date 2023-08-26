@@ -5,57 +5,47 @@
                 <v-card>
                     <oops-alert v-if="error" :error="error" class="rounded-b-0"/>
 
-                    <v-alert v-if="successMessage" type="success" class="rounded-b-0">
-                        {{ successMessage }}
-                        <template #append>
-                            <v-btn variant="tonal" color="on-primary" to="/login">Login</v-btn>
-                        </template>
-                    </v-alert>
-
-                    <v-card-title class="text-center my-4">Create a new password</v-card-title>
-
+                    <v-card-title class="text-center my-4">Welcome back!</v-card-title>
+                    
                     <v-card-text>
                         <v-form @submit.prevent="submit" :readonly="loading">
                             <v-text-field
                                 v-model="form.email"
                                 label="Email"
                                 type="email"
-                                required
-                            ></v-text-field>
+                                required></v-text-field>
                             <v-text-field
                                 v-model="form.password"
                                 label="Password"
                                 type="password"
-                                required
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="form.password_confirmation"
-                                label="Confirm Password"
-                                type="password"
-                                required
-                            ></v-text-field>
-                            <v-btn type="submit" color="primary" block :loading="loading">Reset Password</v-btn>
+                                required></v-text-field>
+                            <v-btn type="submit" block color="primary">Login</v-btn>
                         </v-form>
+                        <v-btn variant="text" class="mt-2 mb-n1" block to="/forgot-password">Forgot Password?</v-btn>
                     </v-card-text>
                 </v-card>
+
+                <v-card class="mt-4 pa-4 d-flex align-center">
+                    <span>Don't have an account yet?</span>
+                    <v-spacer />
+                    <v-btn variant="text" to="/register">Register</v-btn>                        
+                </v-card>
+
             </v-col>
         </v-row>
     </v-container>
 </template>
 
+
+
+
 <script>
+import store from '@/store';
 import OopsAlert from '@/components/OopsAlert.vue';
-import axios from 'axios';
 
 export default {
     components: {
         OopsAlert,
-    },
-    props: {
-        token: {
-            type: String,
-            required: true,
-        },
     },
     data() {
         return {
@@ -77,26 +67,15 @@ export default {
             form: {
                 email: '',
                 password: '',
-                password_confirmation: '',
             },
-
-            /**
-             * The success message sent by the server.
-             * 
-             * @type {String|null}
-             */
-            successMessage: null,
-        }
+        };
     },
     methods: {
         async submit() {
-            this.successMessage = null;
             this.error = null;
             this.loading = true;
             try {
-                const response = await axios.post('/reset-password', { ...this.form, token: this.token });
-
-                this.successMessage = response.data.message;
+                await store.login(this.form);
             } catch (error) {
                 this.error = error;
                 console.error(error);
@@ -104,8 +83,5 @@ export default {
             this.loading = false;
         },
     },
-    created() {
-        this.form.email = this.$route.query.email;
-    },
-}
+};
 </script>
