@@ -1,0 +1,56 @@
+name: Test the application
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: shivammathur/setup-php@v2
+      with: # install extensions required for Laravel
+        php-version: '8.2'
+        extensions: mbstring, curl, dom, fileinfo, gd, json, mbstring, openssl, pdo, pdo_sqlite, tokenizer, xml, zip, sqlite3
+    - uses: actions/checkout@v3
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    - name: Generate key
+      run: php artisan key:generate
+    - name: Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+    - name: Create Database  # For our humble TODO app, we can use SQLite, in a real world app, is recommended to use the same as production
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: vendor/bin/phpunit
+
+  frontend-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '18.x'
+    - name: Install Dependencies
+      run: npm ci
+    - name: Build assets
+      run: npm run production
+    - name: Lint assets
+      run: npm run lint
+    # No frontend tests for now. 
+    # - name: Execute tests (Unit and Feature tests) via Jest
+    #   run: npm run test
