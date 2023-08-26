@@ -20,6 +20,10 @@
     <meta name="theme-color" content="#ffffff">
 
     @vite(['resources/js/main.js', 'resources/css/main.css'])
+
+    <script>
+        window.appData = @json($appData);
+    </script>
 </head>
 <body>
     <div id="app"></div>

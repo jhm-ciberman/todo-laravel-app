@@ -49,6 +49,6 @@ class User extends Authenticatable
      */
     public function tasks(): HasMany
     {
-        return $this->hasMany(Task::class)->orderBy('order');
+        return $this->hasMany(Task::class)->orderByDesc('created_at');
     }
 }

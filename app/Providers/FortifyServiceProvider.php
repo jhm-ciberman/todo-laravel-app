@@ -6,7 +6,9 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Http\Controllers\HomeController;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -29,11 +31,11 @@ class FortifyServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // We are making an SPA, so we use a single view for all Fortify routes.
-        Fortify::loginView('home');
-        Fortify::registerView('home');
-        Fortify::requestPasswordResetLinkView('home');
-        Fortify::resetPasswordView('home');
-        Fortify::resetPasswordView(fn (Request $request) => view('home', ['request' => $request]));
+        Fortify::loginView($this->homeView(...));
+        Fortify::registerView($this->homeView(...));
+        Fortify::requestPasswordResetLinkView($this->homeView(...));
+        Fortify::resetPasswordView($this->homeView(...));
+        Fortify::resetPasswordView($this->homeView(...));
 
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
@@ -49,5 +51,13 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
+    }
+
+    /**
+     * Get the home view for the given request.
+     */
+    protected function homeView(Request $request): View
+    {
+        return $this->app->make(HomeController::class)->__invoke($request);
     }
 }

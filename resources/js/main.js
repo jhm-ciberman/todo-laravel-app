@@ -13,6 +13,7 @@ import 'vuetify/styles';
 import { md3 } from 'vuetify/blueprints';
 import { createVuetify } from 'vuetify';
 import router from './router';
+import store from './store';
 
 
 const vuetify = createVuetify({
@@ -28,6 +29,10 @@ const vuetify = createVuetify({
         },
     },
 });
+
+if (window.appData) {
+    store.hydrate(window.appData);
+}
 
 createApp(App)
     .use(vuetify)

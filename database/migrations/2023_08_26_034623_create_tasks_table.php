@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title');
             $table->foreignId('user_id')->constrained();
             $table->timestamp('completed_at')->nullable();
-            $table->integer('order')->nullable();
         });
     }
 

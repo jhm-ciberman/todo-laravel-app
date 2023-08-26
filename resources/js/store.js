@@ -65,6 +65,16 @@ const store = reactive({
 
         router.push({ name: 'Dashboard' });
     },
+
+    /**
+     * Hydrate the store with the given data.
+     *
+     * @param {{ user: object? }} data
+     */
+    hydrate(data) {
+        this.isLoggedIn = data.user !== null;
+        this.user = data.user;
+    },
 });
 
 export default store;

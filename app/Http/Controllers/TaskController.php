@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,8 +19,6 @@ class TaskController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return JsonResponse
      */
     public function index(Request $request): JsonResponse
     {
@@ -58,13 +55,11 @@ class TaskController extends Controller
         $request->validate([
             'title' => ['required', 'string'],
             'completed' => ['required', 'boolean'],
-            'order' => ['nullable', 'integer'],
         ]);
 
         $task->fill([
             'title' => $request->input('title'),
             'completed_at' => $request->input('completed') ? now() : null,
-            'order' => $request->input('order'),
         ])->save();
 
         return $task;

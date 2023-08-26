@@ -20,7 +20,6 @@ class TaskFactory extends Factory
             'title' => $this->faker->sentence,
             'user_id' => \App\Models\User::factory(),
             'completed_at' => null,
-            'order' => null,
         ];
     }
 

@@ -30,7 +30,6 @@ class TaskControllerTest extends TestCase
                     'id',
                     'title',
                     'completed_at',
-                    'order',
                     'created_at',
                     'updated_at',
                 ],
@@ -50,7 +49,6 @@ class TaskControllerTest extends TestCase
             'id',
             'title',
             'completed_at',
-            'order',
             'created_at',
             'updated_at',
         ]);
@@ -74,7 +72,6 @@ class TaskControllerTest extends TestCase
             'id',
             'title',
             'completed_at',
-            'order',
             'created_at',
             'updated_at',
         ]);

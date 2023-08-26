@@ -28,7 +28,6 @@ class Task extends Model implements Arrayable
     protected $fillable = [
         'title',
         'completed_at',
-        'order',
     ];
 
     /**
@@ -50,7 +49,6 @@ class Task extends Model implements Arrayable
             'id' => $this->id,
             'title' => $this->title,
             'completed_at' => $this->completed_at,
-            'order' => $this->order,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
