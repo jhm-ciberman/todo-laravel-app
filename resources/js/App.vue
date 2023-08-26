@@ -1,12 +1,12 @@
 <template>
     <v-app class="bg-login">
-        <v-app-bar color="surface" elevation="2">
+        <v-app-bar color="surface" elevation="2" style="min-width: 300px;">
             <v-container>
                 <v-row dense class="align-center">
                     <router-link :to="isLogged ? '/dashboard' : '/'" class="d-flex align-center no-underline">
                         <!-- App Icon by Icons8 -->
                         <img src="@/../images/logo.svg" alt="Logo" height="40" class="mt-n1"/>
-                        <v-app-bar-title class="align-center d-flex">
+                        <v-app-bar-title class="align-center d-flex" v-if="$vuetify.display.width > 400">
                             <span class="ml-3 align-center">
                                 <span class="font-weight-bold text-primary">Check</span>
                                 <span class="font-weight-light text-black">Buddy</span>

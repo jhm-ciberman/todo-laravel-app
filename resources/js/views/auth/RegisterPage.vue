@@ -8,7 +8,7 @@
                     <v-card-title class="text-center my-4">Create an account</v-card-title>
                     
                     <v-card-text>
-                        <p class="mb-5 text-center">Start managing your tasks and projects right now.</p>
+                        <p class="mb-5 text-center">Start managing your tasks right now.</p>
 
                         <v-form @submit.prevent="submit" :readonly="loading">
                             <v-text-field

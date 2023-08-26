@@ -11,11 +11,12 @@ CheckBuddy is a simple laravel checklist demo app. It is a simple app that allow
 
 **Backend**
 - Laravel 10
-- Laravel Fortify for authentication
+- Laravel Fortify for authentication (login, registration & password reset)
 - Laravel Sail for local development
 - Laravel Pint for backend linting
+- MySQL database
 
-**Frontend**
+**Frontend SPA**
 - Vue 3
 - Vuetify 3
 - Vue router
@@ -78,3 +79,7 @@ To lint the code you can run Laravel Pint for the backend and ESLint for the fro
 sail pint            # Lint backend
 sail npm run lint    # Lint frontend
 ```
+
+## Mail
+
+The Sail environment comes with Mailpit. You can access it at [http://localhost:8025](http://localhost:8025) and check the emails sent by the app.

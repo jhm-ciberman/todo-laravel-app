@@ -21,6 +21,7 @@
 
     @vite(['resources/js/main.js', 'resources/css/main.css'])
 
+    {{-- This is hidrated in main.js --}}
     <script>
         window.appData = @json($appData);
     </script>
