@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="12" md="6" offset-md="3">
+            <v-col cols="12" lg="8" offset-lg="2" xl="6" offset-xl="3">
                 <h1 class="mb-4">My Tasks</h1>
 
                 <oops-alert v-if="error" :error="error" />
