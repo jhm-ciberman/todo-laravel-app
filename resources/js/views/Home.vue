@@ -3,9 +3,9 @@
         <v-row>
             <v-col cols="12" md="6" offset-md="3">
                 <v-card>
-                    <v-card-title>TODO App</v-card-title>
+                    <v-card-title>{{ appName }}</v-card-title>
                     <v-card-text>
-                        <p>TODO App is a simple todo app built with Laravel and Vue.</p>
+                        <p>{{ appName }} is a simple todo app built with Laravel and Vue.</p>
                         <p>It uses Laravel Fortify for authentication and Vue Router for routing.</p>
                         <p>It also uses Vuetify 3 for styling.</p>
                         <p>It is a great starting point for building your next Laravel + Vue app.</p>
@@ -21,3 +21,14 @@
         </v-row>
     </v-container>
 </template>
+
+<script>
+
+export default {
+    data() {
+        return {
+            appName: import.meta.env.VITE_APP_NAME,
+        }
+    },
+};
+</script>

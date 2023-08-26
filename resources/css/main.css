@@ -9,3 +9,7 @@
 body, html {
     font-family: 'Nunito', sans-serif !important;
 }
+
+a.no-underline {
+    text-decoration: none !important;
+}

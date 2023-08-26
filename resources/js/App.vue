@@ -2,9 +2,17 @@
     <v-app class="bg-login">
         <v-app-bar color="surface" elevation="2">
             <v-container>
-                <v-row dense>
-                    <v-app-bar-title>TODO App</v-app-bar-title>
-        
+                <v-row dense class="align-center">
+                    <router-link :to="isLogged ? '/dashboard' : '/'" class="d-flex align-center no-underline">
+                        <img src="/images/logo.svg" alt="Logo" height="40" class="mt-n1"/>
+                        <v-app-bar-title class="align-center d-flex">
+                            <span class="ml-3 align-center">
+                                <span class="font-weight-bold text-primary">Check</span>
+                                <span class="font-weight-light text-black">Buddy</span>
+                            </span>
+                        </v-app-bar-title>
+                    </router-link>
+
                     <v-spacer />
         
                     <v-btn v-if="isLogged" @click="logout" color="primary">Logout</v-btn>
@@ -17,6 +25,10 @@
         <v-main>
             <router-view />
         </v-main>
+
+        <!--
+            App Icon by Icons8
+        -->
     </v-app>
 </template>
 
@@ -26,6 +38,7 @@ import store from './store';
 export default {
     data() {
         return {
+            appName: import.meta.env.VITE_APP_NAME,
             drawer: false,
         }
     },

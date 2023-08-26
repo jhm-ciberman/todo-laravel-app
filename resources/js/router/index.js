@@ -23,24 +23,34 @@ const routes = [
         path: '/',
         name: 'Home',
         component: () => import('@/views/Home.vue'),
+        beforeEnter: [ensureGuest],
     },
     {
         path: '/login',
         name: 'Login',
         component: () => import('@/views/auth/Login.vue'),
         beforeEnter: [ensureGuest],
+        meta: {
+            title: 'Login',
+        },
     },
     {
         path: '/register',
         name: 'Register',
         component: () => import('@/views/auth/Register.vue'),
         beforeEnter: [ensureGuest],
+        meta: {
+            title: 'Register',
+        },
     },
     {
         path: '/forgot-password',
         name: 'ForgotPassword',
         component: () => import('@/views/auth/ForgotPassword.vue'),
         beforeEnter: [ensureGuest],
+        meta: {
+            title: 'Forgot Password',
+        },
     },
     {
         path: '/reset-password/:token',
@@ -48,6 +58,9 @@ const routes = [
         component: () => import('@/views/auth/ResetPassword.vue'),
         beforeEnter: [ensureGuest],
         props: true,
+        meta: {
+            title: 'Reset Password',
+        },
     },
     {
         path: '/dashboard',
@@ -61,5 +74,15 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
 });
+
+router.beforeEach((to, from) => {
+    // If the route has a meta title set, update the document title
+    const appName = import.meta.env.VITE_APP_NAME;
+
+    document.title = to.meta.title
+        ? `${to.meta.title} | ${appName}`
+        : appName;
+});
+
 
 export default router;
