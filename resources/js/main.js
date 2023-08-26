@@ -6,17 +6,30 @@
 
 import './bootstrap';
 
-// Components
 import App from './App.vue';
-
-// Composables
 import { createApp } from 'vue';
+import '@mdi/font/css/materialdesignicons.css';
+import 'vuetify/styles';
+import { md3 } from 'vuetify/blueprints';
+import { createVuetify } from 'vuetify';
+import router from './router';
 
-// Plugins
-import { registerPlugins } from '@/plugins';
 
-const app = createApp(App);
+const vuetify = createVuetify({
+    blueprint: md3,
+    theme: {
+        themes: {
+            light: {
+                colors: {
+                    primary: '#54913f',
+                    secondary: '#54CA92',
+                },
+            },
+        },
+    },
+});
 
-registerPlugins(app);
-
-app.mount('#app');
+createApp(App)
+    .use(vuetify)
+    .use(router)
+    .mount('#app');

@@ -4,6 +4,7 @@
             <v-container>
                 <v-row dense class="align-center">
                     <router-link :to="isLogged ? '/dashboard' : '/'" class="d-flex align-center no-underline">
+                        <!-- App Icon by Icons8 -->
                         <img src="/images/logo.svg" alt="Logo" height="40" class="mt-n1"/>
                         <v-app-bar-title class="align-center d-flex">
                             <span class="ml-3 align-center">
@@ -26,9 +27,6 @@
             <router-view />
         </v-main>
 
-        <!--
-            App Icon by Icons8
-        -->
     </v-app>
 </template>
 
