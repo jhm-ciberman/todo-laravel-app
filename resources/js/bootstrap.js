@@ -5,9 +5,28 @@
  */
 
 import axios from 'axios';
+import store from './store';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Accept'] = 'application/json';
+
+// Configure a handler for 401 responses. If we get a 401 response
+// from the server, it means that we are not logged in.
+
+window.axios.interceptors.response.use(
+    response => response,
+    error => {
+        if (error.isAxiosError) {
+            const status = error.response.status;
+            if (status === 401 || status === 419) {
+                store.sessionExpired();
+            }
+        }
+
+        return Promise.reject(error);
+    }
+);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
